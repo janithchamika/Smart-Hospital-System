@@ -189,11 +189,46 @@ int main() {
                 printf("=======================================================\n");
                 break;
 
-            case 3:
-                printf("Exiting System. Good Bye!\n");
+          case 3:
+                printf("\n--- Patient Priority List ---\n");
+
+                if (patientCount == 0) {
+                    printf("No patients registered yet!\n");
+                    break;
+                }
+
+                int order[MAX_PATIENTS];
+                for (int i = 0; i < patientCount; i++) {
+                    order[i] = i;
+                }
+
+                for (int i = 0; i < patientCount - 1; i++) {
+                    for (int j = 0; j < patientCount - i - 1; j++) {
+
+                        int p1 = order[j];
+                        int p2 = order[j + 1];
+
+                        if (urgencyLevel[p1] < urgencyLevel[p2]) {
+                            order[j] = p2;
+                            order[j + 1] = p1;
+                        }
+                    }
+                }
+                for (int i = 0; i < patientCount; i++) {
+                    int p = order[i];
+
+                    printf("Patient ID: PAT-%d | Name: %s | Urgency Level: %d\n",
+                           1 + p, patientNames[p], urgencyLevel[p]);
+                }
+
                 break;
+
+
+
             case 4:
+
                 printf("Exiting System. Good Bye!\n");
+
                 break;
             case 5:
                 printf("Exiting System. Good Bye!\n");
