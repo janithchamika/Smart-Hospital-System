@@ -13,6 +13,16 @@ short urgencyLevel[MAX_PATIENTS], specialtyID[MAX_PATIENTS], isAdmitted[MAX_PATI
 int main() {
     short choice;
 
+    FILE *fLoad = fopen("beds_status.txt", "r");
+    if (fLoad != NULL) {
+        for (int w = 0; w < 4; w++) {
+            for (int b = 0; b < bedCapacities[w]; b++) {
+                fscanf(fLoad, "%d", &bedOccupancy[w][b]);
+            }
+        }
+        fclose(fLoad);
+    }
+
     do {
 
         printf("\n======================================================\n");
@@ -29,7 +39,7 @@ int main() {
         switch(choice) {
             case 1:
 
-                printf("\n - Patient Registration ---------------\n");
+                printf("\n\n - Patient Registration ---------------\n\n");
 
                 if (patientCount >= MAX_PATIENTS) {
                     printf("Maximum patient capacity reached!\n");
@@ -84,12 +94,21 @@ int main() {
                 patientCount++;
                 printf("\n ~ Patient Registered Successfully !!\n");
 
+
+
+                FILE *fLog = fopen("patient_records.txt", "a");
+                if (fLog != NULL) {
+                    fprintf(fLog, "PAT-%d | Name: %s | Age: %d | Urgency: %d\n",
+                            00000 + patientCount, patientNames[patientCount - 1],
+                            patientAges[patientCount - 1], urgencyLevel[patientCount - 1]);
+                    fclose(fLog);
+                }
+
                 break;
 
 
             case 2:
-                printf("\n- Print Patient Bill ---------------\n");
-
+                printf("\n\n- Print Patient Bill ---------------\n\n");
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
                     break;
@@ -190,7 +209,7 @@ int main() {
                 break;
 
           case 3:
-                printf("\n- Patient Priority List ---------------\n");
+                printf("\n\n- Patient Priority List ---------------\n\n");
 
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
@@ -227,7 +246,7 @@ int main() {
 
             case 4:
 
-                printf("\n- Analytics Reports ---------------\n");
+                printf("\n\n- Analytics Reports ---------------\n\n");
                 if (patientCount == 0) {
                     printf("No patients!\n");
                     break;
@@ -276,7 +295,18 @@ int main() {
 
             case 5:
 
-                printf("Exiting System. Good Bye!\n");
+                FILE *fSave = fopen("beds_status.txt", "w");
+                if (fSave != NULL) {
+                    for (int w = 0; w < 4; w++) {
+                        for (int b = 0; b < bedCapacities[w]; b++) {
+                            fprintf(fSave, "%d ", bedOccupancy[w][b]);
+                        }
+                        fprintf(fSave, "\n");
+                    }
+                    fclose(fSave);
+                }
+
+                printf("Data Saved. \t\tShutting Down.......!\n");
 
                 break;
             default:
