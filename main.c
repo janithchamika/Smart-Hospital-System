@@ -88,8 +88,7 @@ int main() {
 
 
             case 2:
-                printf("\n--- Print Patient Bill ---\n");
-
+                printf("\n- Print Patient Bill ---------------\n");
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
                     break;
@@ -190,7 +189,7 @@ int main() {
                 break;
 
           case 3:
-                printf("\n--- Patient Priority List ---\n");
+                printf("\n- Patient Priority List ---------------\n");
 
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
@@ -227,14 +226,60 @@ int main() {
 
             case 4:
 
+                printf("\n- Analytics Reports ---------------\n");
+                if (patientCount == 0) {
+                    printf("No patients!\n");
+                    break;
+                }
+
+                int lvls[4] = {0}; // add new levles instead of header file array. It's Easy to handle
+
+                float tRev = 0, tDisc = 0, maxB = 0; //tRev, tDisc, maxB meaning of this variables are total revenue, total discount, maximum bill I used shorter form cuz it's easy to find
+
+                int maxIdx = 0;
+
+                for (int i = 0; i < patientCount; i++) {
+                    lvls[urgencyLevel[i]]++;
+
+                    float baseFee = baseFees[specialtyID[i]-1];
+                    float surcharge = (urgencyLevel[i] == 2) ? baseFee*0.2 : (urgencyLevel[i] == 3) ? baseFee*0.5 : 0; // use ternary form
+                    float wardCost = (isAdmitted[i]) ? daysAdmitted[i] * wardRates[wardID[i]-1] : 0;
+                    float discount = (patientAges[i] < 5 || patientAges[i] > 65) ? (baseFee+surcharge+wardCost)*0.15 : 0;
+                    float finalbill = baseFee + surcharge + wardCost - discount;
+                    tRev += finalbill;
+                    tDisc += discount;
+
+                    if (finalbill > maxB) { maxB = finalbill; maxIdx = i; }
+                }
+
+                printf("1. Patients: %d (Normal:%d, Urgent:%d, Critical:%d)\n", patientCount, lvls[1], lvls[2], lvls[3]);
+                printf("2. Revenue: LKR %.2f | Discounts: LKR %.2f\n", tRev, tDisc);
+
+                printf("3. Bed Occupancy:\n");
+
+
+                for (int w = 0; w < 4; w++) {
+                    int occupiedBeds = 0;
+                    for (int b = 0; b < bedCapacities[w]; b++) {
+                        if (bedOccupancy[w][b] == 1) {
+                            occupiedBeds++;
+                        }
+                    }
+                    float percentage = ((float)occupiedBeds / bedCapacities[w]) * 100;
+                    printf("   - %s: %.1f%%\n", wardNames[w], percentage);
+                }
+
+                printf("4. Highest Bill: %s (LKR %.2f)\n", patientNames[maxIdx], maxB);
+
+                break;
+
+            case 5:
+
                 printf("Exiting System. Good Bye!\n");
 
                 break;
-            case 5:
-                printf("Exiting System. Good Bye!\n");
-                break;
             default:
-                printf("Invalid Choice! Please try again.\n");
+                printf("Invalid Choice #NUMBER! Please try again.\n");
         }
     } while(choice != 5);
 
