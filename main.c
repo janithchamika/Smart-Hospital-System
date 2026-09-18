@@ -94,6 +94,8 @@ int main() {
                 patientCount++;
                 printf("\n ~ Patient Registered Successfully !!\n");
 
+
+
                 FILE *fLog = fopen("patient_records.txt", "a");
                 if (fLog != NULL) {
                     fprintf(fLog, "PAT-%d | Name: %s | Age: %d | Urgency: %d\n",
@@ -293,7 +295,18 @@ int main() {
 
             case 5:
 
-                printf("Exiting System. Good Bye!\n");
+                FILE *fSave = fopen("beds_status.txt", "w");
+                if (fSave != NULL) {
+                    for (int w = 0; w < 4; w++) {
+                        for (int b = 0; b < bedCapacities[w]; b++) {
+                            fprintf(fSave, "%d ", bedOccupancy[w][b]);
+                        }
+                        fprintf(fSave, "\n");
+                    }
+                    fclose(fSave);
+                }
+
+                printf("Data Saved. \t\tShutting Down.......!\n");
 
                 break;
             default:
