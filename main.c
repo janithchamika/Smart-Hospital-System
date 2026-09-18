@@ -89,7 +89,6 @@ int main() {
 
             case 2:
                 printf("\n- Print Patient Bill ---------------\n");
-
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
                     break;
