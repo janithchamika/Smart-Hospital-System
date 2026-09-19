@@ -1,3 +1,6 @@
+
+
+
 #include "hospital.h"
 
 int patientCount = 0;
@@ -54,23 +57,54 @@ int main() {
                 printf(T_ITALIC  C_ORANGE "\nEnter Patient Age: "C_RESET);
                 scanf("%d", &patientAges[patientCount]);
 
+                while (patientAges[patientCount] <= 0 || patientAges[patientCount] >= 120) {
+                    printf(C_RED "You Entered Wrong Age! Please enter a valid age (1-119): " C_RESET);
+                    scanf("%d", &patientAges[patientCount]);
+                }
                 printf(T_ITALIC  C_ORANGE "\nEnter Urgency Level (1 = Normal, 2 = Urgent, 3 = Critical) : "C_RESET);
                 scanf("%hd", &urgencyLevel[patientCount]);
 
+                while (urgencyLevel[patientCount]<=0 || urgencyLevel[patientCount] > 3 ) {
+                    printf(C_RED "You Entered Wrong #NUMBER! Please enter a valid Number : " C_RESET);
+                    scanf("%hd", &urgencyLevel[patientCount]);
+                }
+
                 printf(T_ITALIC  C_ORANGE "\nSelect Specialty (1=General, 2=Paediatrics, 3=Cardiology, 4=Neurology): "C_RESET);
                 scanf("%hd", &specialtyID[patientCount]);
+
+                while (specialtyID[patientCount] <= 0 || specialtyID[patientCount] >4){
+                    printf(C_RED "You Entered Wrong #NUMBER! Please enter a valid Number : " C_RESET);
+                    scanf("%hd",&specialtyID[patientCount]);
+
+                }
 
                 currentQueueCount[specialtyID[patientCount] - 1]++;
 
                 printf(T_ITALIC  C_ORANGE "\nIs Admitted to Ward? (1 = Yes, 0 = No): "C_RESET);
                 scanf("%hd", &isAdmitted[patientCount]);
 
+                while (isAdmitted[patientCount]<0 || isAdmitted[patientCount] > 1){
+                    printf(C_RED "You Entered Wrong #NUMBER! Please enter a valid Number : " C_RESET);
+                    scanf("%hd", &isAdmitted[patientCount]);
+                }
+
                 if (isAdmitted[patientCount] == 1) {
                     printf(T_ITALIC  C_ORANGE "\nSelect Ward ID (1=General, 2=Paediatric, 3=Surgical, 4=ICU): "C_RESET);
                     scanf("%hd", &wardID[patientCount]);
 
+                    while (wardID[patientCount] < 1 || wardID[patientCount] >4 ){
+                        printf(C_RED "You Entered Wrong #NUMBER! Please enter a valid Number : " C_RESET);
+                        scanf("%hd",&wardID[patientCount]);
+                    }
+
                     printf(T_ITALIC  C_ORANGE "\nEnter Days Admitted: "C_RESET);
                     scanf("%d", &daysAdmitted[patientCount]);
+
+                    while (daysAdmitted[patientCount]<0){
+                        printf(C_RED "You Entered Wrong #day count! Please enter a valid Number : " C_RESET);
+                        scanf("%d",&daysAdmitted[patientCount]);
+
+                    }
 
                     int wIndex = wardID[patientCount] - 1;  // I get only the number it's like a index to save
                     int bedAllocated = -1;
