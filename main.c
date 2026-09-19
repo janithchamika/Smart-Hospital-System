@@ -25,49 +25,51 @@ int main() {
 
     do {
 
-        printf("\n======================================================\n");
-        printf("        SMART HOSPITAL & RESOURCE ALLOCATION SYSTEM     \n");
-        printf("=======================================================\n\n");
-        printf("\t1. Register a New Patient\n");
+        printf(C_TITLE "\n=======================================================\n" );
+        printf( T_BOLD T_ITALIC "      SMART HOSPITAL & RESOURCE ALLOCATION SYSTEM     \n" );
+        printf( "=======================================================\n\n" C_RESET);
+
+        printf(C_MENU "\t1. Register a New Patient\n" );
         printf("\t2. Print Patient Bill\n");
         printf("\t3. View Priority List\n");
         printf("\t4. View Analytics Reports\n");
-        printf("\t5. Exit\n\n");
-        printf("Enter your choice: ");
+        printf("\t5. Exit\n\n" C_RESET);
+
+        printf(T_ITALIC  C_PROMPT "Enter your choice: "C_RESET);
         scanf("%hd", &choice);
 
         switch(choice) {
             case 1:
 
-                printf("\n\n - Patient Registration ---------------\n\n");
+                printf(C_TITLE "\n\n - Patient Registration ---------------\n\n"C_RESET);
 
                 if (patientCount >= MAX_PATIENTS) {
-                    printf("Maximum patient capacity reached!\n");
+                    printf(C_RED "Maximum patient capacity reached!\n" C_RESET);
                     break;
                 }
 
-                printf("Enter Patient Name: ");
+                printf(T_ITALIC  C_ORANGE "Enter Patient Name: "C_RESET);
                 scanf(" %[^\n]s", patientNames[patientCount]);
 
-                printf("Enter Patient Age: ");
+                printf(T_ITALIC  C_ORANGE "\nEnter Patient Age: "C_RESET);
                 scanf("%d", &patientAges[patientCount]);
 
-                printf("Enter Urgency Level (1 = Normal, 2 = Urgent, 3 = Critical) : ");
+                printf(T_ITALIC  C_ORANGE "\nEnter Urgency Level (1 = Normal, 2 = Urgent, 3 = Critical) : "C_RESET);
                 scanf("%hd", &urgencyLevel[patientCount]);
 
-                printf("Select Specialty (1=General, 2=Paediatrics, 3=Cardiology, 4=Neurology): ");
+                printf(T_ITALIC  C_ORANGE "\nSelect Specialty (1=General, 2=Paediatrics, 3=Cardiology, 4=Neurology): "C_RESET);
                 scanf("%hd", &specialtyID[patientCount]);
 
                 currentQueueCount[specialtyID[patientCount] - 1]++;
 
-                printf("Is Admitted to Ward? (1 = Yes, 0 = No): ");
+                printf(T_ITALIC  C_ORANGE "\nIs Admitted to Ward? (1 = Yes, 0 = No): "C_RESET);
                 scanf("%hd", &isAdmitted[patientCount]);
 
                 if (isAdmitted[patientCount] == 1) {
-                    printf("Select Ward ID (1=General, 2=Paediatric, 3=Surgical, 4=ICU): ");
+                    printf(T_ITALIC  C_ORANGE "\nSelect Ward ID (1=General, 2=Paediatric, 3=Surgical, 4=ICU): "C_RESET);
                     scanf("%hd", &wardID[patientCount]);
 
-                    printf("Enter Days Admitted: ");
+                    printf(T_ITALIC  C_ORANGE "\nEnter Days Admitted: "C_RESET);
                     scanf("%d", &daysAdmitted[patientCount]);
 
                     int wIndex = wardID[patientCount] - 1;  // I get only the number it's like a index to save
@@ -82,9 +84,9 @@ int main() {
                     }
 
                     if (bedAllocated != -1) {
-                        printf("Bed #%02d allocated successfully in %s.\n", bedAllocated, wardNames[wIndex]);
+                        printf("\n\nBed #%02d allocated successfully in %s.\n", bedAllocated, wardNames[wIndex]);
                     } else {
-                        printf("Sorry, no beds available in the selected ward!\n");
+                        printf("\n\nSorry, no beds available in the selected ward!\n");
                     }
                 } else {
                     wardID[patientCount] = 0;
@@ -92,7 +94,7 @@ int main() {
                 }
 
                 patientCount++;
-                printf("\n ~ Patient Registered Successfully !!\n");
+                printf(T_BOLD T_ITALIC C_GREEN "\n ~ Patient Registered Successfully !!\n"C_RESET);
 
 
 
@@ -108,7 +110,7 @@ int main() {
 
 
             case 2:
-                printf("\n\n- Print Patient Bill ---------------\n\n");
+                printf(C_TITLE "\n\n- Print Patient Bill ---------------\n\n"C_RESET);
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
                     break;
@@ -209,7 +211,7 @@ int main() {
                 break;
 
           case 3:
-                printf("\n\n- Patient Priority List ---------------\n\n");
+                printf(C_TITLE "\n\n- Patient Priority List ---------------\n\n"C_RESET);
 
                 if (patientCount == 0) {
                     printf("No patients registered yet!\n");
@@ -246,7 +248,7 @@ int main() {
 
             case 4:
 
-                printf("\n\n- Analytics Reports ---------------\n\n");
+                printf(C_TITLE "\n\n- Analytics Reports ---------------\n\n"C_RESET);
                 if (patientCount == 0) {
                     printf("No patients!\n");
                     break;
