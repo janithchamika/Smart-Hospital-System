@@ -100,7 +100,7 @@ int main() {
 
                 FILE *fLog = fopen("patient_records.txt", "a");
                 if (fLog != NULL) {
-                    fprintf(fLog, "PAT-%d | Name: %s | Age: %d | Urgency: %d\n",
+                    fprintf(fLog, "PATIENT - %d | Name: %s | Age: %d | Urgency: %d\n",
                             00000 + patientCount, patientNames[patientCount - 1],
                             patientAges[patientCount - 1], urgencyLevel[patientCount - 1]);
                     fclose(fLog);
@@ -177,7 +177,7 @@ int main() {
                 printf(C_LBLUE "\n======================================================\n");
                 printf("            SMART HOSPITAL ADMISSION & BILL           \n");
                 printf("=======================================================\n" C_RESET);
-                printf(C_ORANGE "Patient ID           : PAT-%d\n", searchID);
+                printf(C_ORANGE "Patient ID           : PATIENT - %d\n", searchID);
                 printf("Patient Name         : %s\n", patientNames[index]);
                 printf("Age                  : %s\n", ageStr);
                 printf("Specialty            : %s\n", specNames[specIndex]);
@@ -238,7 +238,7 @@ int main() {
                 for (int i = 0; i < patientCount; i++) {
                     int p = order[i];
 
-                    printf(C_ORANGE "Patient ID: PAT-%d | Name: %s \t| Urgency Level: %d\n" C_RESET,
+                    printf(C_ORANGE "Patient ID: PATIENT - %d | Name: %s \t| Urgency Level: %d\n" C_RESET,
                            1 + p, patientNames[p], urgencyLevel[p]);
                 }
 
