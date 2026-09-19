@@ -154,9 +154,14 @@ int main() {
                 printf(C_PROMPT T_ITALIC "Enter Patient ID (maximum 100): " C_RESET);
                 scanf("%d", &searchID);
 
+                while (searchID< 0 || searchID > 100){
+                    printf(C_RED "You Entered Wrong #ID! Please Start with 1 - 100 : " C_RESET);
+                    scanf("%d", &searchID);
+                }
+
                 int index = searchID - 1;
 
-                if (index < 0 || index >= patientCount) {
+                 if (index >= patientCount) {
                     printf(C_RED "\n \t\tPatient ID not found!\n" C_RESET);
                     break;
                 }
