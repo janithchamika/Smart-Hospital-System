@@ -94,7 +94,7 @@ int main() {
                 }
 
                 patientCount++;
-                printf(T_BOLD T_ITALIC C_GREEN "\n ~ Patient Registered Successfully !!\n"C_RESET);
+                printf(T_ITALIC C_GREEN "\n \t\t~ Patient Registered Successfully !!\n"C_RESET);
 
 
 
@@ -250,7 +250,7 @@ int main() {
 
                 printf(C_TITLE "\n\n- Analytics Reports ---------------\n\n"C_RESET);
                 if (patientCount == 0) {
-                    printf("No patients!\n");
+                    printf(C_RED "\t\t No patients!\n"C_RESET);
                     break;
                 }
 
@@ -274,7 +274,7 @@ int main() {
                     if (finalbill > maxB) { maxB = finalbill; maxIdx = i; }
                 }
 
-                printf("1. Patients: %d (Normal:%d, Urgent:%d, Critical:%d)\n", patientCount, lvls[1], lvls[2], lvls[3]);
+                printf(C_ORANGE "1. Patients: %d (Normal:%d, Urgent:%d, Critical:%d)\n", patientCount, lvls[1], lvls[2], lvls[3]);
                 printf("2. Revenue: LKR %.2f | Discounts: LKR %.2f\n", tRev, tDisc);
 
                 printf("3. Bed Occupancy:\n");
@@ -291,7 +291,7 @@ int main() {
                     printf("   - %s: %.1f%%\n", wardNames[w], percentage);
                 }
 
-                printf("4. Highest Bill: %s (LKR %.2f)\n", patientNames[maxIdx], maxB);
+                printf("4. Highest Bill: %s (LKR %.2f)\n" C_RESET, patientNames[maxIdx], maxB);
 
                 break;
 
@@ -308,11 +308,11 @@ int main() {
                     fclose(fSave);
                 }
 
-                printf("Data Saved. \t\tShutting Down.......!\n");
+                printf(T_ITALIC C_GREEN "\n \t\tData Saved. Shutting Down.......!\n"C_RESET);
 
                 break;
             default:
-                printf("Invalid Choice #NUMBER! Please try again.\n");
+                printf(C_RED "\n \t\tInvalid Choice #NUMBER! Please try again.\n"C_RESET);
         }
     } while(choice != 5);
 
