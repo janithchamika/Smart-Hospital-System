@@ -112,18 +112,18 @@ int main() {
             case 2:
                 printf(C_TITLE "\n\n- Print Patient Bill ---------------\n\n"C_RESET);
                 if (patientCount == 0) {
-                    printf("No patients registered yet!\n");
+                    printf(C_RED "\n \t\tNo patients registered yet!\n" C_RESET);
                     break;
                 }
 
                 int searchID;
-                printf("Enter Patient ID (maximum 100): ");
+                printf(C_PROMPT T_ITALIC "Enter Patient ID (maximum 100): " C_RESET);
                 scanf("%d", &searchID);
 
                 int index = searchID - 1;
 
                 if (index < 0 || index >= patientCount) {
-                    printf("Patient ID not found!\n");
+                    printf(C_RED "\n \t\tPatient ID not found!\n" C_RESET);
                     break;
                 }
 
@@ -174,17 +174,17 @@ int main() {
 
                 const char* specNames[] = {"General Practice (OPD)", "Paediatrics", "Cardiology", "Neurology"};
 
-                printf("\n======================================================\n");
+                printf(C_LBLUE "\n======================================================\n");
                 printf("            SMART HOSPITAL ADMISSION & BILL           \n");
-                printf("=======================================================\n");
-                printf("Patient ID           : PAT-%d\n", searchID);
+                printf("=======================================================\n" C_RESET);
+                printf(C_ORANGE "Patient ID           : PAT-%d\n", searchID);
                 printf("Patient Name         : %s\n", patientNames[index]);
                 printf("Age                  : %s\n", ageStr);
                 printf("Specialty            : %s\n", specNames[specIndex]);
                 printf("Assigned Ward        : %s\n", wardStr);
                 printf("Urgency Level        : %s\n", urgencyStr);
                 printf("Base Consultation Fee: LKR %.2f\n", baseFee);
-                printf("Emergency Surcharge  : LKR %.2f (%d%%)\n", surcharge, surchargePct);
+                printf("Emergency Surcharge  : LKR %.2f (%d%%)\n" , surcharge, surchargePct);
 
                 if (isAdmitted[index] == 1) {
                     printf("Ward Stay Cost       : LKR %.2f (%d Days)\n", wardCost, daysAdmitted[index]);
@@ -205,9 +205,9 @@ int main() {
                 if (waitTime == 0) {
                     printf("Estimated Wait Time  : 0.00 mins (Immediate Attention)\n");
                 } else {
-                    printf("Estimated Wait Time  : %.2f mins\n", waitTime);
+                    printf("Estimated Wait Time  : %.2f mins\n" C_RESET, waitTime);
                 }
-                printf("=======================================================\n");
+                printf(C_LBLUE "=======================================================\n" C_RESET );
                 break;
 
           case 3:
