@@ -214,7 +214,7 @@ int main() {
                 printf(C_TITLE "\n\n- Patient Priority List ---------------\n\n"C_RESET);
 
                 if (patientCount == 0) {
-                    printf("No patients registered yet!\n");
+                    printf(C_RED "\n \t\tNo patients registered yet!\n" C_RESET);
                     break;
                 }
 
@@ -238,7 +238,7 @@ int main() {
                 for (int i = 0; i < patientCount; i++) {
                     int p = order[i];
 
-                    printf("Patient ID: PAT-%d | Name: %s | Urgency Level: %d\n",
+                    printf(C_ORANGE "Patient ID: PAT-%d | Name: %s \t| Urgency Level: %d\n" C_RESET,
                            1 + p, patientNames[p], urgencyLevel[p]);
                 }
 
